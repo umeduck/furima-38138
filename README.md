@@ -46,7 +46,7 @@ Things you may want to cover:
 
 | Column             | type          | option                        |
 | ------------------ | ------------- | ----------------------------- |
-| name               | text(40)      | null: false                   |
+| name               | string        | null: false                   |
 | explanation        | text(1000)    | null: false                   |
 | category_id        | integer       | null: false                   |
 | state_id           | integer       | null: false                   |
@@ -76,11 +76,12 @@ Things you may want to cover:
 
 | Column             | type          | option                        |
 | ------------------ | ------------- | ----------------------------- |
-| postal_code        | integer       | null: false                   |
+| postal_code        | string        | null: false                   |
 | prefecture_id      | integer       | null: false                   |
 | city               | string        | null: false                   |
-| house_number       | integer       | null: false                   |
-| building_name      | string        | null: false                   |
+| house_number       | string        | null: false                   |
+| building_name      | string        |                               |
+| phone_number       | string        | null: false                   |
 | history            | references    | null: false                   |
 
 - belongs_to history
