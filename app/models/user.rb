@@ -13,4 +13,7 @@ class User < ApplicationRecord
     validates :birth
   end
   validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i, message: 'is invalid. Include half-width alphanumeric characters'}
+
+  has_many :products
+  
 end
