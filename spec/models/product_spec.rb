@@ -46,17 +46,17 @@ RSpec.describe Product, type: :model do
       it '価格の値が300未満では保存できない' do
         @product.price = 200
         @product.valid?
-        expect(@product.errors.full_messages).to include("Price must be greater than or equal to 300")
+        expect(@product.errors.full_messages).to include('Price must be greater than or equal to 300')
       end
       it '価格の値が10000000以上では保存できない' do
-        @product.price = 10000000
+        @product.price = 10_000_000
         @product.valid?
-        expect(@product.errors.full_messages).to include("Price must be less than or equal to 9999999")
+        expect(@product.errors.full_messages).to include('Price must be less than or equal to 9999999')
       end
       it '価格が半角数字以外では保存ができない' do
         @product.price = '４０００'
         @product.valid?
-        expect(@product.errors.full_messages).to include("Price is not a number")
+        expect(@product.errors.full_messages).to include('Price is not a number')
       end
       it '配送料負担が正しく選択されていない場合保存できない' do
         @product.load_id = 1
@@ -73,7 +73,6 @@ RSpec.describe Product, type: :model do
         @product.valid?
         expect(@product.errors.full_messages).to include("Delivery can't be blank")
       end
-
     end
   end
 end
