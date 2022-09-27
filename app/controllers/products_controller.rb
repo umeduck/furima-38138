@@ -24,6 +24,7 @@ class ProductsController < ApplicationController
   def edit
     redirect_to root_path unless current_user.id == @product.user_id
   end
+
   def update
     if @product.update(product_params)
       redirect_to product_path(params[:id])
@@ -31,7 +32,6 @@ class ProductsController < ApplicationController
       render :edit
     end
   end
-
 
   private
 
@@ -43,5 +43,4 @@ class ProductsController < ApplicationController
   def product_find
     @product = Product.find(params[:id])
   end
-
 end
