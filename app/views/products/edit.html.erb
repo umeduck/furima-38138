@@ -22,7 +22,6 @@
         <%= f.file_field :image, id:"item-image" %>
       </div>
     </div>
-    <%# 商品名と商品説明 %>
     <div class="new-items">
       <div class="weight-bold-text">
         商品名
@@ -106,9 +105,7 @@
         </div>
       </div>
     </div>
-    <%# /販売価格 %>
 
-    <%# 注意書き %>
     <div class="caution">
       <p class="sentence">
         <a href="#">禁止されている出品、</a>
@@ -126,13 +123,10 @@
         に同意したことになります。
       </p>
     </div>
-    <%# /注意書き %>
-    <%# 下部ボタン %>
     <div class="sell-btn-contents">
       <%= f.submit "変更する" ,class:"sell-btn" %>
-      <%=link_to 'もどる', "#", class:"back-btn" %>
+      <%=link_to 'もどる', product_path(@product.id), class:"back-btn" %>
     </div>
-    <%# /下部ボタン %>
   </div>
   <% end %>
 
