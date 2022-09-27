@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :product_find, only: [:show, :edit, :update, :destroy]
+  before_action :only_user, only: [:edit, :destroy]
   def index
     @product = Product.order('created_at DESC')
   end
@@ -22,7 +23,6 @@ class ProductsController < ApplicationController
   end
 
   def edit
-    redirect_to root_path unless current_user.id == @product.user_id
   end
 
   def update
@@ -48,4 +48,9 @@ class ProductsController < ApplicationController
   def product_find
     @product = Product.find(params[:id])
   end
+
+  def only_user
+    redirect_to root_path unless current_user.id == @product.user_id
+  end
+
 end
