@@ -32,7 +32,7 @@ class ProductsController < ApplicationController
       render :edit
     end
   end
-  
+
   def destroy
     @product.delete
     redirect_to root_path
