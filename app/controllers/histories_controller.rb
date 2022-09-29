@@ -6,7 +6,6 @@ class HistoriesController < ApplicationController
 
 
   def create
-    
     @product_id = params[:product_id]
     @history_address = HistoryAddress.new(history_address_params)
     if @history_address.valid?
