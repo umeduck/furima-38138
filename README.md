@@ -82,6 +82,6 @@ Things you may want to cover:
 | house_number       | string        | null: false                   |
 | building_name      | string        |                               |
 | phone_number       | string        | null: false                   |
-| history            | references    | null: false                   |
+| history            | references    | foreign_key: true, null false |
 
 - belongs_to history
