@@ -1,5 +1,5 @@
 class HistoriesController < ApplicationController
-  before_action :instance_product, only: [:same_puroduct_user, :index]
+  before_action :instance_product, only: [:index, :create]
   before_action :authenticate_user!
   before_action :bought, only: :index
   before_action :same_puroduct_user, only: :index
@@ -17,7 +17,6 @@ class HistoriesController < ApplicationController
       @history_address.save
       redirect_to root_path
     else
-      bought
       render :index
     end
   end
@@ -48,6 +47,7 @@ class HistoriesController < ApplicationController
   end
 
   def same_puroduct_user
+    @product = Product.find(params[:product_id])
     redirect_to root_path if current_user.id == @product.user_id
   end
 end
