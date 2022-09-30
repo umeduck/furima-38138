@@ -17,4 +17,5 @@ class User < ApplicationRecord
                       message: 'is invalid. Include half-width alphanumeric characters' }
 
   has_many :products
+  has_many :histories
 end

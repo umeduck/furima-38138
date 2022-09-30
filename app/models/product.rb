@@ -8,6 +8,7 @@ class Product < ApplicationRecord
   belongs_to :category
   belongs_to :state
   belongs_to :user
+  has_one :history
 
   with_options presence: true do
     validates :name

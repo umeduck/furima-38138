@@ -2,6 +2,8 @@ class ProductsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :product_find, only: [:show, :edit, :update, :destroy]
   before_action :only_user, only: [:edit, :destroy]
+  before_action :bought, only: [:edit]
+
   def index
     @product = Product.order('created_at DESC')
   end
@@ -53,4 +55,7 @@ class ProductsController < ApplicationController
     redirect_to root_path unless current_user.id == @product.user_id
   end
 
+  def bought
+    redirect_to root_path if History.exists?(product_id: params[:id])
+  end
 end

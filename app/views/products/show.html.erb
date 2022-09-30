@@ -7,13 +7,12 @@
     </h2>
     <div class="item-img-content">
       <%= image_tag @product.image ,class:"item-box-img" %>
-      <%# 商品が売れている場合は、sold outを表示しましょう %>
-      <%# if @product.history.exists? %><%# 商品購入機能実装後に条件式の追加 %>
+
+      <% if History.exists?(product_id: @product.id) %>
         <div class="sold-out">
           <span>Sold Out!!</span>
         </div>
-      <%# end %>
-      <%# //商品が売れている場合は、sold outを表示しましょう %>
+      <% end %>
     </div>
     <div class="item-price-box">
       <span class="item-price">
@@ -24,18 +23,19 @@
       </span>
     </div>
 
-    <% if user_signed_in? && current_user.id == @product.user.id %>
-      <%= link_to "商品の編集", edit_product_path(@product.id), method: :get, class: "item-red-btn" %>
-      <p class="or-text">or</p>
-      <%= link_to "削除", product_path(@product.id), method: :delete, class:"item-destroy" %>
-    <% end %>
+    <% unless History.exists?(product_id: @product.id) %>
+     <% if user_signed_in? && current_user.id == @product.user.id %>
+       <%= link_to "商品の編集", edit_product_path(@product.id), method: :get, class: "item-red-btn" %>
+       <p class="or-text">or</p>
+       <%= link_to "削除", product_path(@product.id), method: :delete, class:"item-destroy" %>
+     <% end %>
 
-    <% if user_signed_in? && @product.user.id != current_user.id %>
-      <%# 商品が売れていない場合はこちらを表示しましょう %>
-      <%# if @product.history.exists? %><%# 商品購入機能実装後に条件式の追加 %>
-        <%= link_to "購入画面に進む", "#" ,class:"item-red-btn"%>
-      <%# end %>
-      <%# //商品が売れていない場合はこちらを表示しましょう %>
+     <% if user_signed_in? && @product.user.id != current_user.id %>
+
+       <% unless History.exists?(product_id: @product.id) %>
+         <%= link_to "購入画面に進む", product_histories_path(@product.id) ,class:"item-red-btn"%>
+       <% end %>
+     <% end %>
     <% end %>
 
 
