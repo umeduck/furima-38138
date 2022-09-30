@@ -17,9 +17,9 @@ RSpec.describe HistoryAddress, type: :model do
         @history_address.building_name = ''
         expect(@history_address).to be_valid
       end
-      end
-      
-      context '内容に問題がある場合' do
+    end
+
+    context '内容に問題がある場合' do
       it '郵便番号が空では保存できない' do
         @history_address.postal_code = ''
         @history_address.valid?
@@ -28,7 +28,7 @@ RSpec.describe HistoryAddress, type: :model do
       it '郵便番号は半角かつハイフンがないと保存できない' do
         @history_address.postal_code = '１２３４５６７'
         @history_address.valid?
-        expect(@history_address.errors.full_messages).to include("Postal code is invalid. Include hyphen(-)")
+        expect(@history_address.errors.full_messages).to include('Postal code is invalid. Include hyphen(-)')
       end
       it '都道府県が正しく選択されていない場合保存できない' do
         @history_address.area_id = 1
@@ -53,17 +53,17 @@ RSpec.describe HistoryAddress, type: :model do
       it '電話番号が半角数字以外では保存できない' do
         @history_address.phone_number = '０９０１２３４１２３４'
         @history_address.valid?
-        expect(@history_address.errors.full_messages).to include("Phone number is not a number")
+        expect(@history_address.errors.full_messages).to include('Phone number is not a number')
       end
       it '携帯番号が10桁未満では保存できない' do
         @history_address.phone_number = '090'
         @history_address.valid?
-        expect(@history_address.errors.full_messages).to include("Phone number is too short (minimum is 10 characters)")
+        expect(@history_address.errors.full_messages).to include('Phone number is too short (minimum is 10 characters)')
       end
       it '携帯番号が12桁以上では保存できない' do
         @history_address.phone_number = '090123451234'
         @history_address.valid?
-        expect(@history_address.errors.full_messages).to include("Phone number is too long (maximum is 11 characters)")
+        expect(@history_address.errors.full_messages).to include('Phone number is too long (maximum is 11 characters)')
       end
       it 'tokenが空では登録できない' do
         @history_address.token = nil

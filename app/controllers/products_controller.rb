@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
   before_action :product_find, only: [:show, :edit, :update, :destroy]
   before_action :only_user, only: [:edit, :destroy]
   before_action :bought, only: [:edit]
-  
+
   def index
     @product = Product.order('created_at DESC')
   end
@@ -58,5 +58,4 @@ class ProductsController < ApplicationController
   def bought
     redirect_to root_path if History.exists?(product_id: params[:id])
   end
-
 end
