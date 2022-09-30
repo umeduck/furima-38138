@@ -1,4 +1,9 @@
 class HistoriesController < ApplicationController
+  before_action :authenticate_user!
+  before_action :bought, only: :index
+  before_action :same_puroduct_user, only: :index
+  
+
   def index
     @history_address = HistoryAddress.new
     @product = Product.find(params[:product_id])
@@ -32,4 +37,15 @@ class HistoriesController < ApplicationController
         currency: 'jpy'
       )
   end
+  
+  def bought
+    redirect_to root_path if History.exists?(product_id: params[:product_id])
+  end
+
+  def same_puroduct_user
+    redirect_to root_path unless current_user.id ==  params[:product_id]
+  end
+
+
+  
 end
