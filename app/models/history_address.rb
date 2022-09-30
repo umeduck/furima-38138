@@ -1,7 +1,7 @@
 class HistoryAddress
 
   include ActiveModel::Model
-  attr_accessor :product_id, :user_id, :postal_code, :area_id, :city, :house_number, :building_name, :phone_number
+  attr_accessor :product_id, :user_id, :postal_code, :area_id, :city, :house_number, :building_name, :phone_number, :token
 
   with_options presence: true do
     validates :product_id
@@ -11,6 +11,7 @@ class HistoryAddress
     validates :city
     validates :house_number
     validates :phone_number, numericality: { only_integer: true}, length: { in: 10..11 }
+    validates :token
   end
 
   def save

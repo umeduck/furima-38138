@@ -65,6 +65,11 @@ RSpec.describe HistoryAddress, type: :model do
         @history_address.valid?
         expect(@history_address.errors.full_messages).to include("Phone number is too long (maximum is 11 characters)")
       end
+      it 'tokenが空では登録できない' do
+        @history_address.token = nil
+        @history_address.valid?
+        expect(@history_address.errors.full_messages).to include("Token can't be blank")
+      end
       it 'ユーザーが紐付いていなければ投稿できない' do
         @history_address.user_id = nil
         @history_address.valid?
