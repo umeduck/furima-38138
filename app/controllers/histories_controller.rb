@@ -44,6 +44,7 @@ class HistoriesController < ApplicationController
   end
 
   def same_puroduct_user
-    redirect_to root_path unless current_user.id == params[:product_id]
+    product = Product.find(params[:product_id])
+    redirect_to root_path if current_user.id == product.user_id
   end
 end
