@@ -1,11 +1,11 @@
 class HistoriesController < ApplicationController
+  before_action :instance_product, only: [:same_puroduct_user, :index]
   before_action :authenticate_user!
   before_action :bought, only: :index
   before_action :same_puroduct_user, only: :index
 
   def index
     @history_address = HistoryAddress.new
-    @product = Product.find(params[:product_id])
   end
 
   def create
@@ -17,12 +17,16 @@ class HistoriesController < ApplicationController
       @history_address.save
       redirect_to root_path
     else
-      @product = Product.find(params[:product_id])
+      bought
       render :index
     end
   end
 
   private
+
+  def instance_product
+    @product = Product.find(params[:product_id])
+  end
 
   def history_address_params
     params.require(:history_address).permit(:postal_code, :area_id, :city, :house_number, :building_name, :phone_number).merge(
@@ -44,7 +48,6 @@ class HistoriesController < ApplicationController
   end
 
   def same_puroduct_user
-    product = Product.find(params[:product_id])
-    redirect_to root_path if current_user.id == product.user_id
+    redirect_to root_path if current_user.id == @product.user_id
   end
 end
