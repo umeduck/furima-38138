@@ -11,7 +11,7 @@
 #
 default: &default
   adapter: mysql2
-  database: furima-38138_production
+  database: furima_38138_production
   username: root
   password: <%= ENV['DATABASE_PASSWORD'] %>
   socket: /var/lib/mysql/mysql.sock
